@@ -13,7 +13,7 @@
 int args_print(arrstr *array, char pick, va_list args)
 {
 	int counter = 0, i;
-	int (*fp)(va_list) = NULL;
+	int (*func)(va_list) = NULL;
 
 	if (pick == '%')
 	{
@@ -25,18 +25,18 @@ int args_print(arrstr *array, char pick, va_list args)
 	{
 		if (pick == array[i].letter)
 		{
-			fp = array[i].fxnpoint;
+			func = array[i].fxnpoint;
 			break;
 		}
 	}
-	if (fp == NULL)
+	if (func == NULL)
 	{
 		_putchar('%');
 		_putchar(pick);
 		counter += 2;
 		return (counter);
 	}
-	counter = fp(args);
+	counter = func(args);
 	return (counter);
 }
 
@@ -76,14 +76,13 @@ int _printf(const char *format, ...)
 				return (count);
 			}
 			count += args_print(array, pick, args);
-			hold++;
 		}
 		else
 		{
 			_putchar(*hold);
 			count++;
-			hold++;
 		}
+		hold++;
 	}
 	va_end(args);
 	return (count);
