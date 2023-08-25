@@ -13,6 +13,7 @@
 int args_print(arrstr *array, char pick, va_list args)
 {
 	int counter = 0, i;
+	int (*fp)(va_list) = NULL;
 
 	if (pick == '%')
 	{
@@ -22,21 +23,21 @@ int args_print(arrstr *array, char pick, va_list args)
 	}
 	for (i = 0; array[i].fxnpoint != NULL; i++)
 	{
-		if (pick == array[i].pick)
+		if (pick == array[i].letter)
 		{
-			fxnpoint = array[i].fxnpoint;
+			fp = array[i].fxnpoint;
 			break;
 		}
 	}
-	if (fxnpoint == NULL)
+	if (fp == NULL)
 	{
 		_putchar('%');
-		_putchar(spec);
-		count += 2;
-		return (count);
+		_putchar(pick);
+		counter += 2;
+		return (counter);
 	}
-	count = fxnpoint(args);
-	return (count);
+	counter = fp(args);
+	return (counter);
 }
 
 /**
@@ -49,7 +50,7 @@ int _printf(const char *format, ...)
 {
 	arrstr array[] = {
 		{'c', print_char},
-		{'s', _putst},
+		{'s', _putstr},
 		{'\0', NULL}
 	};
 
