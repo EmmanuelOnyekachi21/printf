@@ -14,4 +14,5 @@ typedef struct structures
 int _putchar(char c);
 int print_char(va_list args);
 int _printf(const char *format, ...);
+int _putstr(va_list str);
 #endif
