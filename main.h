@@ -15,6 +15,10 @@ int _putchar(char c);
 int print_char(va_list args);
 int print_binary(va_list args);
 int whole_number(va_list args);
+int print_hex(va_list val);
+int print_HEX(va_list val);
+int oct_printal(va_list args);
+int print_unsigned_num(va_list args);
 int _printf(const char *format, ...);
 int _putstr(va_list str);
 #endif

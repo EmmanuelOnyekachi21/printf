@@ -54,6 +54,10 @@ int _printf(const char *format, ...)
 		{'d', whole_number},
 		{'i', whole_number},
 		{'b', print_binary},
+		{'x', print_hex},
+		{'X', print_HEX},
+		{'o', oct_printal},
+		{'u', print_unsigned_num},
 		{'\0', NULL}
 	};
 
