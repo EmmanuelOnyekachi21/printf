@@ -51,6 +51,8 @@ int _printf(const char *format, ...)
 	arrstr array[] = {
 		{'c', print_char},
 		{'s', _putstr},
+		{'d', whole_number},
+		{'i', whole_number},
 		{'\0', NULL}
 	};
 
