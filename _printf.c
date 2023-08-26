@@ -53,6 +53,7 @@ int _printf(const char *format, ...)
 		{'s', _putstr},
 		{'d', whole_number},
 		{'i', whole_number},
+		{'b', print_binary},
 		{'\0', NULL}
 	};
 
