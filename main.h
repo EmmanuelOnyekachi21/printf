@@ -1,24 +1,29 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef MAIN_HEADER
+#define MAIN_HEADER
+
+/***LIBRARYS***/
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 #include <stdarg.h>
-/**
- * struct structures - structure holding a char and a function pointer.
- * @letter: format specifier charcater
- * @fxnpoint: Function pointr to handle specifier
- */
-typedef struct structures
-{
-	char letter;
-	int (*fxnpoint)(va_list args);
-} arrstr;
-int _putchar(char c);
-int print_char(va_list args);
-int print_binary(va_list args);
-int whole_number(va_list args);
-int print_hex(va_list val);
-int print_HEX(va_list val);
-int oct_printal(va_list args);
-int print_unsigned_num(va_list args);
+
+/****FUNCTIONS****/
+
 int _printf(const char *format, ...);
-int _putstr(va_list str);
+int all_specifier(const char *format, va_list ap);
+int specifiers_1(const char *format, va_list ap);
+int specifier_2(const char *format, va_list ap);
+int print_character(va_list ap);
+int my_putchar(char c);
+int print_string(va_list ap);
+int print_decint(va_list arg);
+int print_binary(va_list ap);
+int print_unsign(va_list ap);
+int print_octal(va_list ap);
+int print_hexlower(va_list ap);
+int print_hexupper(va_list ap);
+/********BUFFER HANDLING**********/
+/**MACROS***/
+
+
 #endif
