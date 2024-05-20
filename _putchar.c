@@ -1,17 +1,27 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include "main.h"
 
 /**
- * my_putchar - writes the character c to stdout
- * @c: The character to print
+ * _putchar - Writes the character to output
+ * @c: Character
  *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * Return: If succesful, 1 else 0.
  */
-int my_putchar(char c)
+int _putchar(char c)
 {
 	return (write(1, &c, 1));
+}
+
+/**
+ * print_char - writes character c to output
+ * @args: va_list argumnet to retrieve a character to print
+ * Return: If successful, 1 else 0.
+ */
+int print_char(va_list args)
+{
+	char c;
+
+	c = (char)va_arg(args, int);
+	_putchar(c);
+	return (1);
 }

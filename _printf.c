@@ -1,27 +1,96 @@
-#include "main.h"
 #include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
 #include <stdarg.h>
+#include "main.h"
+
 /**
- * _printf - custom to depict the original printf.
- * @format: the string to print and format by specifiers.
- * Description: built by Kelvin and Afia.
- * Return: lenght of the output on sucess.
+ * args_print - Prints the variadic fxn based on specifier
+ * @array: array of  structure containing specifier and function pointer
+ * @pick: specifies char
+ * @args: points to next variadic function.
+ * Return: count
+ */
+
+int args_print(arrstr *array, char pick, va_list args)
+{
+	int counter = 0, i;
+	int (*func)(va_list) = NULL;
+
+	if (pick == '%')
+	{
+		_putchar('%');
+		counter++;
+		return (counter);
+	}
+	for (i = 0; array[i].fxnpoint != NULL; i++)
+	{
+		if (pick == array[i].letter)
+		{
+			func = array[i].fxnpoint;
+			break;
+		}
+	}
+	if (func == NULL)
+	{
+		_putchar('%');
+		_putchar(pick);
+		counter += 2;
+		return (counter);
+	}
+	counter = func(args);
+	return (counter);
+}
+
+/**
+ * _printf - function same as printf
+ * @format: format specifier string
+ *
+ * Return: count of characters.
  */
 int _printf(const char *format, ...)
 {
-	va_list ap;
-	int count;
+	arrstr array[] = {
+		{'c', print_char},
+		{'s', _putstr},
+		{'d', whole_number},
+		{'i', whole_number},
+		{'b', print_binary},
+		{'x', print_hex},
+		{'X', print_HEX},
+		{'o', oct_printal},
+		{'u', print_unsigned_num},
+		{'\0', NULL}
+	};
 
-	va_start(ap, format);
+	const char *hold = format;
+	int count = 0;
+	char pick;
 
-	if ((!format) || (format[0] == '%' && !format[1]))
+	va_list args;
+
+	if (format == NULL)
 		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
-	count = all_specifier(format, ap);
 
-	va_end(ap);
+	va_start(args, format);
+	while (hold && *hold)
+	{
+		if (*hold == '%')
+		{
+			hold++;
+			pick = *hold;
+			if (pick == '\0')
+			{
+				count += _putchar('%');
+				return (count);
+			}
+			count += args_print(array, pick, args);
+		}
+		else
+		{
+			_putchar(*hold);
+			count++;
+		}
+		hold++;
+	}
+	va_end(args);
 	return (count);
 }
