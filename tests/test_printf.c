@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 #include "../main.h"
 
 int main(void)
@@ -24,6 +25,31 @@ int main(void)
     chars_xprinted = printf("Percentage: %%\n");
     printf("Chars xprinted: %d\n\n", chars_xprinted);
 
+    printf("----------------------------------\n");
+    _printf(NULL);
+    printf(NULL);
+    printf("----------------------------------\n");
+
+    _printf("Hello World%"); 
+    printf("Hello World%"); 
+
+    printf("----------------------------------\n");
+    _printf("String: %s\n", NULL);
+    printf("String: %s\n", NULL);
+
+    printf("----------------------------------\n");
+    _printf("Unknown specifier: %x\n", 123);
+    printf("Unknown specifier: %x\n", 123);
+    printf("----------------------------------\n");
+
+    _printf("INT_MAX: %d\n", INT_MAX);
+    _printf("INT_MAX: %d\n", INT_MAX); 
+    printf("----------------------------------\n");
+    _printf("INT_MIN: %d\n", INT_MIN);
+    printf("INT_MIN: %d\n", INT_MIN); 
+    printf("----------------------------------\n");
+
+    _printf("Zero: %d\n", 0);
+
     return (0);
 }
-
