@@ -23,20 +23,24 @@ int handle_specifier(char spec, va_list args, spec_fxn specifiers[])
 	while (specifiers[i].spec)
 	{
 		if (spec == specifiers[i].spec)
-			return (specifiers[i].func(args));
+		{
+			if (specifiers[i].func != NULL)
+				return (specifiers[i].func(args));
+			if (specifiers[i].func == NULL)
+			{
+				/* Function pointer is NULL */
+				count += _putchar('%');
+				count += _putchar(spec);
+				return (count);
+			}
+		}
 		i++;
 	}
 
 	/* Handle when the function pointer is NULL */
-	if (*func == NULL)
-	{
-		_putchar('%');
-		_putchar(spec);
-		count += 2;
-		return (count);
-	}
-
-	return (_putchar('%') + _putchar(spec));
+	count += _putchar('%');
+	count += _putchar(spec);
+	return (count);
 }
 
 /**
