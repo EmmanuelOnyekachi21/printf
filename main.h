@@ -1,24 +1,15 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef MAIN_H
+#define MAIN_H
+
 #include <stdarg.h>
-/**
- * struct structures - structure holding a char and a function pointer.
- * @letter: format specifier charcater
- * @fxnpoint: Function pointr to handle specifier
- */
-typedef struct structures
+typedef struct specify_function
 {
-	char letter;
-	int (*fxnpoint)(va_list args);
-} arrstr;
+	char spec;
+	int (*func)(va_list);
+} spec_fxn;
 int _putchar(char c);
-int print_char(va_list args);
-int print_binary(va_list args);
-int whole_number(va_list args);
-int print_hex(va_list val);
-int print_HEX(va_list val);
-int oct_printal(va_list args);
-int print_unsigned_num(va_list args);
 int _printf(const char *format, ...);
-int _putstr(va_list str);
-#endif
+int print_string(va_list args);
+int print_char(va_list args);
+int handle_specifier(char spec, va_list args, spec_fxn specifiers[]);
+#endif /* MAIN_H */

@@ -1,96 +1,70 @@
-#include <stdio.h>
-#include <stdarg.h>
 #include "main.h"
+#include <stdio.h>
 
 /**
- * args_print - Prints the variadic fxn based on specifier
- * @array: array of  structure containing specifier and function pointer
- * @pick: specifies char
- * @args: points to next variadic function.
- * Return: count
+ * handle_specifier - A helper function to handle specifiers.
+ * @spec: The character pointed to in the memory.
+ * @args: va_list containing the character pointed to.
+ * @specifiers: References the array carrying the function pointer and spec.
+ *
+ * Return: The number of characters printed.
  */
-
-int args_print(arrstr *array, char pick, va_list args)
+int handle_specifier(char spec, va_list args, spec_fxn specifiers[])
 {
-	int counter = 0, i;
-	int (*func)(va_list) = NULL;
+	int i = 0;
+	int count = 0;
 
-	if (pick == '%')
+	if (spec == '%')
 	{
-		_putchar('%');
-		counter++;
-		return (counter);
+		count = _putchar('%');
+		return (count);
 	}
-	for (i = 0; array[i].fxnpoint != NULL; i++)
+
+	while (specifiers[i].spec)
 	{
-		if (pick == array[i].letter)
-		{
-			func = array[i].fxnpoint;
-			break;
-		}
+		if (spec == specifiers[i].spec)
+			return (specifiers[i].func(args));
+		i++;
 	}
-	if (func == NULL)
-	{
-		_putchar('%');
-		_putchar(pick);
-		counter += 2;
-		return (counter);
-	}
-	counter = func(args);
-	return (counter);
+
+	return (_putchar('%') + _putchar(spec));
 }
 
 /**
- * _printf - function same as printf
- * @format: format specifier string
+ * _printf - A custom implementation of the printf function.
+ * @format: Format specifier string.
  *
- * Return: count of characters.
+ * Return: Count of characters printed.
  */
 int _printf(const char *format, ...)
 {
-	arrstr array[] = {
+	int count = 0;
+	va_list args;
+
+	spec_fxn specifiers[] = {
 		{'c', print_char},
-		{'s', _putstr},
-		{'d', whole_number},
-		{'i', whole_number},
-		{'b', print_binary},
-		{'x', print_hex},
-		{'X', print_HEX},
-		{'o', oct_printal},
-		{'u', print_unsigned_num},
+		{'s', print_string},
 		{'\0', NULL}
 	};
 
-	const char *hold = format;
-	int count = 0;
-	char pick;
-
-	va_list args;
-
-	if (format == NULL)
+	if (!format)
 		return (-1);
 
 	va_start(args, format);
-	while (hold && *hold)
+
+	while (*format)
 	{
-		if (*hold == '%')
+		if (*format == '%')
 		{
-			hold++;
-			pick = *hold;
-			if (pick == '\0')
-			{
-				count += _putchar('%');
-				return (count);
-			}
-			count += args_print(array, pick, args);
+			format++;/* Move past '%' */
+			count += handle_specifier(*format, args, specifiers);
 		}
 		else
-		{
-			_putchar(*hold);
-			count++;
-		}
-		hold++;
+			count += _putchar(*format);
+		format++;/* Move to the next character in format. */
 	}
+
 	va_end(args);
+
 	return (count);
 }
