@@ -27,6 +27,15 @@ int handle_specifier(char spec, va_list args, spec_fxn specifiers[])
 		i++;
 	}
 
+	/* Handle when the function pointer is NULL */
+	if (*func == NULL)
+	{
+		_putchar('%');
+		_putchar(spec);
+		count += 2;
+		return (count);
+	}
+
 	return (_putchar('%') + _putchar(spec));
 }
 
