@@ -58,7 +58,10 @@ int _printf(const char *format, ...)
 		{
 			format++;/* Move past '%' */
 			if (*format == '\0')
-				return (-1);
+			{
+				count += _putchar('%');
+				return (count);
+			}
 			count += handle_specifier(*format, args, specifiers);
 		}
 		else
