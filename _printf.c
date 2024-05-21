@@ -26,7 +26,7 @@ int handle_specifier(char spec, va_list args, spec_fxn specifiers[])
 		{
 			if (specifiers[i].func != NULL)
 				return (specifiers[i].func(args));
-			if (specifiers[i].func == NULL)
+			else if (specifiers[i].func == NULL)
 			{
 				/* Function pointer is NULL */
 				count += _putchar('%');
