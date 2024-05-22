@@ -14,7 +14,7 @@ int print_string(va_list args)
 	int count = 0;
 
 	if (str == NULL)
-		str = "(nil)";
+		str = "(null)";
 
 	while (*str)
 	{
