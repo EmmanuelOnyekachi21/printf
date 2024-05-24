@@ -57,8 +57,8 @@ int _printf(const char *format, ...)
 	spec_fxn specifiers[] = {
 		{'c', print_char},
 		{'s', print_string},
-		{'d', print_number},
-		{'i', print_number},
+		{'d', print_integer},
+		{'i', print_integer},
 		{'\0', NULL}
 	};
 

@@ -1,46 +1,63 @@
 #include "main.h"
 #include <stdio.h>
+#include <limits.h>
 
 /**
- * print_number - Prints a number.
+ * _abs - returns absolute of a number except INT_MIN
+ * @n: number to be processed.
+ *
+ * Return: returns absolute int value
+ */
+int _abs(int n)
+{
+	int absolute_number;
+
+	absolute_number = (n < 0) ? (n * -1) : n;
+
+	return (absolute_number);
+}
+
+/**
+ * print_number - Actual functions that processes the number printing.
+ *
+ * @value: The number gotten from the va_list.
+ *
+ * Return the number of count
+ */
+int print_number(int value)
+{
+	int last_number, operand, count = 0;
+
+	if (value < 0)
+	{
+		_putchar('-');
+		count++;
+	}
+	last_number = _abs(value % 10);
+	operand = _abs(value / 10);
+
+	if (operand != 0)
+	{
+		count += print_number(operand);
+	}
+	_putchar('0' + last_number);
+	count++;
+
+	return (count);
+}
+
+/**
+ * print_integer - Prints a number.
  *
  * @args: va_list containing the number to print.
  * Return: The number of characters printed.
  */
-int print_number(va_list args)
+int print_integer(va_list args)
 {
-	int i = 0;
-	char buffer[12];
 	int number;
-	int is_negative = 0;
 	int count = 0;
 
 	number = va_arg(args, int);
-
-	if (number == 0)
-	{
-		count += _putchar('0');
-		return (count);
-	}
-
-	if (number < 0)
-	{
-		is_negative = 1;
-		number *= -1;
-	}
-
-	while (number > 0)
-	{
-		buffer[i] = (number % 10) + '0';
-		i++;
-		number /= 10;
-	}
-
-	if (is_negative)
-		buffer[i++] = '-';
-
-	while (i--)
-		count += _putchar(buffer[i]);
-
+	count = print_number(number);
 	return (count);
 }

@@ -12,5 +12,7 @@ int _printf(const char *format, ...);
 int print_string(va_list args);
 int print_char(va_list args);
 int handle_specifier(char spec, va_list args, spec_fxn specifiers[]);
-int print_number(va_list args);
+int _abs(int n);
+int print_integer(va_list args);
+int print_number(int value);
 #endif /* MAIN_H */
