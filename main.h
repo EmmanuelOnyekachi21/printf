@@ -16,4 +16,5 @@ int _abs(int n);
 int print_integer(va_list args);
 int print_number(int value);
 int print_binary(va_list args);
+int binary_helper(unsigned int number);
 #endif /* MAIN_H */
