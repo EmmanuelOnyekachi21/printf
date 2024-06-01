@@ -15,4 +15,5 @@ int handle_specifier(char spec, va_list args, spec_fxn specifiers[]);
 int _abs(int n);
 int print_integer(va_list args);
 int print_number(int value);
+int print_binary(va_list args);
 #endif /* MAIN_H */
