@@ -15,6 +15,14 @@ int handle_specifier(char spec, va_list args, spec_fxn specifiers[]);
 int _abs(int n);
 int print_integer(va_list args);
 int print_number(int value);
+int print_octal(va_list args);
+int octal_helper(unsigned int number);
+int unsigned_helper(unsigned int number);
+int print_unsigned(va_list args);
 int print_binary(va_list args);
 int binary_helper(unsigned int number);
+int print_HEX(va_list args);
+int HEX_helper(unsigned int number);
+int print_hex(va_list args);
+int hex_helper(unsigned int number);
 #endif /* MAIN_H */
