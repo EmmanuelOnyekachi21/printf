@@ -2,6 +2,9 @@
 #define MAIN_H
 
 #include <stdarg.h>
+
+#define BUFSIZE 1024
+
 typedef struct specify_function
 {
 	char spec;
@@ -25,4 +28,5 @@ int print_HEX(va_list args);
 int HEX_helper(unsigned int number);
 int print_hex(va_list args);
 int hex_helper(unsigned int number);
+int buffer_flush(char *buffer, int *buff_index);
 #endif /* MAIN_H */
